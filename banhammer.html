@@ -140,6 +140,7 @@ function Game(){
 	var castlePOS = 2500;
 	var gg = false;
 	var win = false;
+	var pAck = 15;
 	function LEWO(){
 		if(i > 0){
 			$(".inside").css("left", "-"+i+"px");
@@ -233,7 +234,7 @@ function Game(){
 	}
 
 	function Perform_DEPOY(){
-		for(id = 0; id < 20; id++){
+		for(id = 0; id < pAck; id++){
 			n++;
 			var randomS = Math.floor(Math.random() * (randMAX - randMIN) + randMIN); //(max - min) + min koords of spawn
 			$(".inside").append("<img class='tel' id="+n+" src='tel.png' alt='tel' style='left: "+randomS+"px'/>");
