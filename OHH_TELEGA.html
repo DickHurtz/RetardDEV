@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RETARD gameDEV</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<style>
+p, h1, a{
+	margin: 0;
+}
+main{
+	display: block;
+}
+.camera{
+	width: 400px;
+	height: 400px;
+	margin: auto;
+	overflow: hidden;
+	border: 2px solid #000;
+	color: #fff;
+	display: block;
+	text-align:center;
+	font-size: 0;
+	position: relative;
+}
+.inside{
+	height: 400px;
+	position: absolute;
+	background: url('SHITTYBG.jpg') top left;
+	background-size: contain;
+}
+.rkn{
+	background: none;
+	position: absolute;
+	left: 0;
+	margin: auto;
+	right: 0;
+	z-index: 1;
+	transition: 1s;
+	width: 60px;
+}
+.tel{
+	background: none;
+	position: absolute;
+	margin: auto;
+	z-index: 1;
+	width: 20px;
+	top: 300px;
+}
+.doom{
+	background: none;
+	position: absolute;
+	margin: auto;
+	z-index: 1;
+	width: 100px;
+	transform: translateY(-50%);
+}
+.dead{
+	transition: 0.3s;
+	opacity: 0.5;
+}
+h1{
+	color: #fff;
+}
+h1:hover{
+	color: #000;
+}
+button > span{
+	text-decoration: line-through;
+}
+.RWD-BUTT{
+	text-align:center;
+}
+.baned{
+	position: absolute;
+	top: 200px;
+	margin: auto;
+	font-size: 12px;
+	color: #000;
+	width: 100%;
+}
+.dead_frame{
+	width: 60px;
+	height: 100px;
+	position: absolute;
+	top: 220px;
+	box-sizing: border-box;
+}
+.hp-container{
+	text-align: left;
+	padding: 10px;
+    position: absolute;
+    z-index: 14;
+}
+.hp{
+	width: 10px;
+	height: 10px;
+}
+.score{
+	font-size: 14px;
+    color: #000;
+    position: absolute;
+    right: 10px;
+    padding: 15px;
+    z-index: 88;
+}
+.dead{
+	opacity: 0;
+}
+img.gg {
+    width: 100%;
+    transform: translateY(50%);
+    opacity: 0.7;
+    z-index: 228;
+    box-shadow: inset 0px 0px 140px 40px rgba(255,255,255,1);
+	transition: 1s;
+	height: 200px;
+}
+</style>
+<main>
+<div class="kleshni"><h1></h1><p></p><br/><p id="ochko"><span></span></p></div>
+<div class="camera"><div class="hp-container"></div><div class="score"></div><img class="rkn" src="drisnya.png" alt="rkn" style="top: 250px;"/>
+<div class="inside"><div class="dead_frame" style="left: 230px"></div><img class="doom" src="doomrov.png" alt="tel" style="top: 300px"/></div>
+</div>
+<button onClick="window.location.reload()">RE<span>TARD</span>START</button>
+<div class="RWD-BUTT"></div>
+<div></div>
+</main>
+<script type="text/javascript">
+function Game(){
+	var i = 1;
+	var h = 60;
+	var n = 0;
+	var hp = 30;
+	var score = 0;
+	var map_size = 3000;
+	var randMAX = 3000;
+	var randMIN = 2500;
+	var castlePOS = 2500;
+	var gg = false;
+	var win = false;
+	function LEWO(){
+		if(i > 0){
+			$(".inside").css("left", "-"+i+"px");
+			$(".dead_frame").css("left", "calc(230px + "+i+"px");
+			return i-= 2;
+		}
+	};
+	function PRAWO(){
+		if(i < map_size - 400){
+			$(".inside").css("left", "-"+i+"px");
+			$(".dead_frame").css("left", "calc(230px + "+i+"px)");
+			return i+= 2;
+		}
+	};
+	function JUMP(){
+		$(".rkn").css("top", "calc(250px - "+h+"px");
+		setTimeout(function(){
+			$(".rkn").css("top", "250px");
+		}, 1000);
+	}
+	function POHUIJUMP(){
+		if(i < map_size - 400){
+			JUMP();
+			$(".inside").css("left", "-"+i+"px");
+			return i++;
+		}
+	}
+	function DOPJUMP(){
+		if(i > 0){
+			JUMP();
+			$(".inside").css("left", "-"+i+"px");
+			return i--;
+		}
+	}
+	function DAMAGE(){
+		hp--;
+		$(".hp:last-of-type").replaceWith();
+		if(hp < 1){
+			console.log("GG");
+			gg = true;
+		}
+	}
+	function PIZDULI(){
+		console.log("damage");
+		$(".tel.pizda").addClass("dead");
+		$(".doom.wintime").addClass("win");
+	}
+
+	function DVIGAI(randomS, n){
+		var dviga = setInterval(function(){
+			randomS--;
+			if(randomS > 0){
+				$("#"+n).css("left", randomS+"px");
+			}else{
+				$("#"+n).replaceWith();
+			}
+			if(randomS > Math.floor($(".dead_frame").position().left) && randomS < Math.floor($(".dead_frame").position().left + 60)){
+				console.log("LLIA YEbY");
+				$("#"+n).addClass("pizda");
+				if($("#"+n).hasClass("dead")){
+					randomS -= 1000; //eto kostyl i mnie pohoi, sosi moi kod bydlo
+					score++;
+					$(".score").text("banhammered: "+score+" ips");
+					console.log(score);
+				}
+			}else{
+				$("#"+n).removeClass("pizda");
+			}
+			if(castlePOS > Math.floor($(".dead_frame").position().left) && castlePOS < Math.floor($(".dead_frame").position().left + 60)){
+				console.log("BANTIME!");
+				$(".doom").addClass("wintime");
+				if($(".doom").hasClass("win")){
+					castlePOS -= 1000;
+					$(".doom").replaceWith();
+					console.log("LLIUH!!!!");
+					win = true;
+				}
+			}else{
+				$(".doom").removeClass("wintime");
+			}
+			if(randomS > Math.floor($(".dead_frame").position().left - 60) && randomS < Math.floor($(".dead_frame").position().left) && $(".rkn:not(.pizda)").position().top > 249){
+				$("#"+n).css("background","red");
+				DAMAGE();
+			}else{
+				$("#"+n).css("background","none");
+			}
+			if(gg == true || win == true){
+				clearInterval(dviga);
+			}
+		}, 100);
+	}
+
+	function Perform_DEPOY(){
+		for(id = 0; id < 5; id++){
+			n++;
+			var randomS = Math.floor(Math.random() * (randMAX - randMIN) + randMIN); //(max - min) + min koords of spawn
+			$(".inside").append("<img class='tel' id="+n+" src='tel.png' alt='tel' style='left: "+randomS+"px'/>");
+			$("#"+n).css("left", randomS+"px");
+			DVIGAI(randomS, n);
+		}
+		if(gg == true){
+			clearInterval(depoy);
+			$(".camera").append("<img src='gg.jpg' alt='dead' class='gg'>");
+		}
+		if(win == true){
+			clearInterval(depoy);
+			$(".camera").append("<img src='win.jpg' alt='win' class='gg'>");
+		}
+	}
+	var depoy = setInterval(Perform_DEPOY, 5000);
+
+	$(document).ready(function(){
+		$(".doom").css("left", castlePOS);
+		$(".inside").css("width",map_size);
+		for(i = 0; i < hp; i++){
+			$(".hp-container").append("<img src='rkn.png' alt='rkn' class='hp'/>");
+		}
+		$(".score").text("banhammered: "+score+" ips");
+		setInterval(
+		function(){
+			if($(".hp").length < 10){
+				$(".hp-container").append("<img src='rkn.png' alt='rkn' class='hp'/>");
+			}
+		}, 5000);
+	});
+
+	var keys = {};
+	var trahanie = 0;
+	$(document).keydown(function(e, i){
+		if(gg == false){
+			if(e.which == 37){
+				LEWO();
+			}
+			if(e.which == 38){
+				trahanie++;
+				if(trahanie < 10){
+					JUMP();
+				}
+			}
+			if(e.which == 39){
+				PRAWO();
+			}
+			if(e.which == 40){
+				PIZDULI();
+			}
+			if(keys[38] && keys[39]){
+				trahanie++;
+				if(trahanie < 10){
+					POHUIJUMP();
+				}
+			}
+			if(keys[37] && keys[39]){
+				trahanie++;
+				if(trahanie < 10){
+					DOPJUMP();
+				}
+			}
+			if(keys[65] && keys[72] && keys[79] && keys[80] && keys[90]){
+				console.log("ZHOPA");
+				$(".tel").replaceWith();
+				$(".camera").append("<p class='baned'>BANED!</p>");
+				if($(".baned").length > 30){
+					alert("NACHOI IDI PIDOR!");
+				}
+				setTimeout(function(){$(".baned").replaceWith()},1000);
+			}
+			keys[e.which] = true;
+		}else{
+			console.log("DENIED!");
+		}
+	});
+	$(document).keyup(function (e) {
+		delete keys[e.which];
+		if(e.which == 38){
+			trahanie = 0;
+		}
+		if(keys[38] && keys[39]){
+			trahanie = 0;
+		}
+		if(keys[37] && keys[39]){
+			trahanie = 0;
+		}
+	});
+}
+Game();
+</script>
+</body>
+</html>
