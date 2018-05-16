@@ -136,7 +136,7 @@ function Game(){
 	var score = 0;
 	var map_size = 3000;
 	var randMAX = 3000;
-	var randMIN = 2500;
+	var randMIN = 900;
 	var castlePOS = 2500;
 	var gg = false;
 	var win = false;
@@ -233,7 +233,7 @@ function Game(){
 	}
 
 	function Perform_DEPOY(){
-		for(id = 0; id < 5; id++){
+		for(id = 0; id < 20; id++){
 			n++;
 			var randomS = Math.floor(Math.random() * (randMAX - randMIN) + randMIN); //(max - min) + min koords of spawn
 			$(".inside").append("<img class='tel' id="+n+" src='tel.png' alt='tel' style='left: "+randomS+"px'/>");
