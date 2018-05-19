@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +103,7 @@ button > span{
     color: #000;
     position: absolute;
     right: 10px;
-    padding: 15px;
+    padding: 30px 0 0;
     z-index: 88;
 }
 .dead{
@@ -117,11 +118,19 @@ img.gg {
 	transition: 1s;
 	height: 200px;
 }
+.controls{
+position: absolute;
+top: 200px;
+color: #000;
+font-size: 12px;
+display: inline-block;
+}
 </style>
 <main>
 <div class="kleshni"><h1></h1><p></p><br/><p id="ochko"><span></span></p></div>
 <div class="camera"><div class="hp-container"></div><div class="score"></div><img class="rkn" src="drisnya.png" alt="rkn" style="top: 250px;"/>
-<div class="inside"><div class="dead_frame" style="left: 230px"></div><img class="doom" src="doomrov.png" alt="tel" style="top: 300px"/></div>
+<div class="inside"><div class="dead_frame" style="left: 230px"></div><img class="doom" src="doomrov.png" alt="tel" style="top: 300px"/>
+<p class="controls 1" style="left: 125px"><-arrows to move-></p><p class="controls 2" style="left: 270px">arrow up + arrow left/right -- jump</p><p class="controls 3" style="left: 500px">arrow down to purge</p></div>
 </div>
 <button onClick="window.location.reload()">RE<span>TARD</span>START</button>
 <div class="RWD-BUTT"></div>
@@ -152,6 +161,15 @@ function Game(){
 		if(i < map_size - 400){
 			$(".inside").css("left", "-"+i+"px");
 			$(".dead_frame").css("left", "calc(230px + "+i+"px)");
+			if(i > 30){
+				$(".controls.1").replaceWith();
+			}
+			if(i > 230){
+				$(".controls.2").replaceWith();
+			}
+			if(i > 400){
+				$(".controls.3").replaceWith();
+			}
 			return i+= 2;
 		}
 	};
